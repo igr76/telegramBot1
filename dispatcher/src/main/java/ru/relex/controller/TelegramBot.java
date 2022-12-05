@@ -26,10 +26,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     private MessageRepository messageRepository;
 
-
     private Message message;
-    Message message1 = new Message();
-
 
     public TelegramBot(UpdateController updateController, Message message) {
         this.updateController = updateController;
@@ -70,7 +67,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = originalMassage.getChatId();
             var chat = originalMassage.getText();
             Message message = new Message();
-            message.setCh
+            message.setChatId(chatId);
 
 
         }
