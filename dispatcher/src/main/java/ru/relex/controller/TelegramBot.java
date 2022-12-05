@@ -14,6 +14,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.relex.model.MessageRepository;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDateTime;
 
 @Component
 @Log4j
@@ -32,6 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.updateController = updateController;
         this.message = message;
     }
+
 
     @PostConstruct
     public void init() {
@@ -64,12 +66,14 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void registerMessage(Message originalMassage) {
         if (messageRepository.findById(originalMassage.getChatId()).isEmpty()) {
-            long chatId = originalMassage.getChatId();
-            var chat = originalMassage.getText();
+            var chatId = originalMassage.getChatId();
+            var chat = originalMassage.getChat();
             Message message = new Message();
             message.setChatId(chatId);
-
-
+            message.setData(extractDate(originalMassage.getText()));
+            message.setMessageString(originalMassage.getText());
+            messageRepository.save(message);
+            log.info("Message save" + message);
         }
     }
 
@@ -82,5 +86,13 @@ public class TelegramBot extends TelegramLongPollingBot {
             }
         }
     }
+
+    public LocalDateTime extractDate(String textDate) {
+       // String regex = " ([0-9\\.\\:\\s]{16})(\\s)([\\W+]+)";
+       LocalDateTime dateTime = LocalDateTime.parse(textDate);
+       return dateTime;
+    }
+
+
 
 }

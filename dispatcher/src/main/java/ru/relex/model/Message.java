@@ -38,4 +38,12 @@ public class Message {
         this.messageString = messageString;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "chatId=" + chatId +
+                ", data=" + data +
+                ", messageString='" + messageString + '\'' +
+                '}';
+    }
 }
