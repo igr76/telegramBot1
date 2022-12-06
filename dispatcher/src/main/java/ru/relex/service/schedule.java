@@ -25,7 +25,6 @@ public class schedule {
         Message messageBD = messageRepository.findByDate(nowDateTime);
         if (messageBD != null) {
             var response = new SendMessage();
-            response.setChatId(messageBD.getChatId().toString());
             response.setText(messageBD.getMessageString());
             telegramBot.sendAnswerMessage(response);
         }

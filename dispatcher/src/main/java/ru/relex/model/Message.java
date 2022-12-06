@@ -8,19 +8,10 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    private Long chatId;
     private LocalDateTime data;
     private String messageString;
 
 
-
-    public Long getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
-    }
 
     public LocalDateTime getData() {
         return data;
@@ -41,7 +32,6 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "chatId=" + chatId +
                 ", data=" + data +
                 ", messageString='" + messageString + '\'' +
                 '}';
