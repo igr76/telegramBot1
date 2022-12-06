@@ -38,8 +38,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         this.updateController = updateController;
         this.message = message;
     }
-
-
     @PostConstruct
     public void init() {
         updateController.registerBot(this);
@@ -57,15 +55,16 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        var originalMassage = update.getMessage();
-        log.info(originalMassage.getText());
-        if (dateTimeCheck.isValid(originalMassage.getText())) {
+        var response = new SendMessage();
+        var originalMassage = update.getMessage().getText();
+        boolean check = dateTimeCheck.isValid(originalMassage);
+        log.info(originalMassage);
+        if (check) {
             registerMessage(originalMassage);
         }
-        var response = new SendMessage();
-        response.setChatId(originalMassage.getChatId().toString());
 
-        switch (originalMassage.getText()) {
+
+        switch (originalMassage) {
             case "/start":
                          response.setText("Hello from bot");
                 sendAnswerMessage(response);
@@ -74,14 +73,13 @@ public class TelegramBot extends TelegramLongPollingBot {
                 response.setText("Sorry, command was not recognized");
                 sendAnswerMessage(response);
         }
-
     }
+    private void registerMessage(String originalMassage) {
 
-    private void registerMessage(Message originalMassage) {
-        if (messageRepository.findById(originalMassage.getChatId()).isEmpty()) {
+        if (messageRepository.findByDate(dateTimeCheck.extractDate(originalMassage)) == null) {
             Message message = new Message();
-            message.setData(extractDate(originalMassage.getText()));
-            message.setMessageString(originalMassage.getText());
+            message.setData(dateTimeCheck.extractDate(originalMassage));
+            message.setMessageString(originalMassage);
             messageRepository.save(message);
             log.info("Message save" + message);
         }

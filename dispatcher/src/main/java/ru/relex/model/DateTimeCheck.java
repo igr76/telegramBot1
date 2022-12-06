@@ -5,10 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DateTimeCheck {
-    DateTimeFormatter dateTimeFormatter
+    DateTimeFormatter dateTimeFormatter;
     public   LocalDateTime extractDate(String textDate) {
-        String formatter = "dd.MM.yyyy HH:mm";
-        LocalDateTime dateTime = LocalDateTime.parse(CharSequence textDate, DateTimeFormatter formatter);
+
+        LocalDateTime dateTime = LocalDateTime.parse( textDate,DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+
         return dateTime;
     }
     public boolean isValid(String dateStr) {
