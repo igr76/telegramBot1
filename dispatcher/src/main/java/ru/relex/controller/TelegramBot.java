@@ -3,7 +3,6 @@ package ru.relex.controller;
 
 
 import lombok.extern.log4j.Log4j;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -53,16 +52,14 @@ public class TelegramBot extends TelegramLongPollingBot {
         return botToken;
     }
 
-    private static var response = new SendMessage();
+    private static  SendMessage response = new SendMessage();
     @Override
     public void onUpdateReceived(Update update) {
-        var response = new SendMessage();
         var originalMassage = update.getMessage().getText();
         log.info(originalMassage);
         if (dateTimeCheck.extractDate(originalMassage) != null) {
             registerMessage(originalMassage);
         }
-
 
         switch (originalMassage) {
             case "/start":
@@ -82,7 +79,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             message.setMessageString(originalMassage);
             messageRepository.save(message);
             log.info("Message save" + message);
-        }  else sendAnswerMessage(response.setText("Такая запись уже есть"));
+        }  else {response.setText("Такая запись уже есть");
+            sendAnswerMessage(response);}
     }
 
     public void sendAnswerMessage(SendMessage message) {
