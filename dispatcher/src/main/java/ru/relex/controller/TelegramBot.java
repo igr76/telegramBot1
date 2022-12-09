@@ -8,17 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.relex.model.DateTimeCheck;
+import ru.relex.model.Message;
 import ru.relex.model.MessageRepository;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 @Component
 @Log4j
@@ -34,10 +30,13 @@ public class TelegramBot extends TelegramLongPollingBot {
     private Message message;
     private DateTimeCheck dateTimeCheck;
 
-    public TelegramBot(UpdateController updateController, Message message) {
+    public TelegramBot(UpdateController updateController,MessageRepository messageRepository,DateTimeCheck dateTimeCheck) {
         this.updateController = updateController;
-        this.message = message;
-    }
+        this.messageRepository = messageRepository;
+        this.dateTimeCheck = dateTimeCheck;
+           }
+
+
     @PostConstruct
     public void init() {
         updateController.registerBot(this);
@@ -73,7 +72,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
     private void registerMessage(String originalMassage) {
 
-        if (messageRepository.findByDate(dateTimeCheck.extractDate(originalMassage)) == null) {
+        if (messageRepository.findByData(dateTimeCheck.extractDate(originalMassage)) == null) {
             Message message = new Message();
             message.setData(dateTimeCheck.extractDate(originalMassage));
             message.setMessageString(originalMassage);

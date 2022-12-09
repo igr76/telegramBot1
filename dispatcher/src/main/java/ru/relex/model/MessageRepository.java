@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    Message findByDate(LocalDateTime dateTime);
+    Message findByData(LocalDateTime dataTime);
 }

@@ -22,7 +22,7 @@ public class schedule {
     @Scheduled(cron = "0 0/1 * * * *")
     public void scheduleUser() throws  InterruptedException {
         LocalDateTime nowDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
-        Message messageBD = messageRepository.findByDate(nowDateTime);
+        Message messageBD = messageRepository.findByData(nowDateTime);
         if (messageBD != null) {
             var response = new SendMessage();
             response.setText(messageBD.getMessageString());
