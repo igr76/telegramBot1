@@ -20,6 +20,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     private String botName;
     @Value("${bot.token}")
     private String botToken;
+
+    //
+    //
     private final UpdateController updateController;
 
     public TelegramBot(UpdateController updateController) {
@@ -39,16 +42,37 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return botToken;
     }
+    private static  SendMessage response = new SendMessage();
+    //11111111111
+
+    //    static final String HELP_TEXT = "This bot is created to demonstrate Spring capabilities.\n\n" +
+//            "You can execute commands from the main menu on the left or by typing a command:\n\n" +
+//            "Type /start to see a welcome message\n\n" +
+//            "Type /mydata to see data stored about yourself\n\n" +
+//            "Type /help to see this message again";
 
     @Override
     public void onUpdateReceived(Update update) {
-        var originalMassage = update.getMessage();
-        log.info(originalMassage.getText());
+        var originalMassage = update.getMessage().getText();
+        log.info(originalMassage);
 
-        var response = new SendMessage();
-        response.setChatId(originalMassage.getChatId().toString());
-        response.setText("Hello from bot");
-        sendAnswerMessage(response);
+        switch (originalMassage) {
+            case "/start":
+                response.setText("Hello from bot");
+                sendAnswerMessage(response);
+                break;
+//            case "/help":
+//                response.setText(HELP_TEXT);
+//                sendAnswerMessage(response);
+//                break;
+//            case "/start":
+//                response.setText("Hello from bot");
+//                sendAnswerMessage(response);
+//                break;
+            default:
+                response.setText("Sorry, command was not recognized");
+                sendAnswerMessage(response);
+        }
     }
     public void sendAnswerMessage(SendMessage message) {
         if (message != null) {
