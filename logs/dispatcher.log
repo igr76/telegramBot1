@@ -1,0 +1,20 @@
+2022-12-04 15:13:28 INFO  TelegramBot:36 - Hello from bot
+2022-12-04 15:13:28 ERROR TelegramBot:48 - org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Unable to deserialize response
+2022-12-04 15:13:39 INFO  TelegramBot:36 - h
+2022-12-04 15:13:39 ERROR TelegramBot:48 - org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException: Unable to deserialize response
+2022-12-04 16:22:39 INFO  TelegramBot:46 - h
+2022-12-04 16:28:48 INFO  TelegramBot:46 - /start
+2022-12-09 13:51:34 INFO  TelegramBot:56 - /start
+2022-12-09 13:52:17 INFO  TelegramBot:56 - 09.12.2022.13:52
+2022-12-09 18:01:49 INFO  TelegramBot:57 - /start
+2022-12-09 21:59:26 INFO  TelegramBot:57 - /start
+2022-12-09 22:20:42 INFO  TelegramBot:57 - /start
+2022-12-09 22:40:55 INFO  TelegramBot:57 - /start
+2022-12-10 21:02:23 INFO  TelegramBot:57 - /start
+2022-12-10 21:03:00 INFO  TelegramBot:57 - 09.12.2022.13:52 hi
+2022-12-10 21:13:33 INFO  TelegramBot:56 - /start
+2022-12-10 21:14:13 INFO  TelegramBot:56 - 09.12.2022.13:52 hi
+2022-12-10 21:48:16 INFO  TelegramBot:57 - /start
+2022-12-10 21:48:16 ERROR TelegramBot:89 - org.telegram.telegrambots.meta.exceptions.TelegramApiValidationException: ChatId parameter can't be empty in method: SendMessage(chatId=null, text=Hello from bot, parseMode=null, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=null, entities=null, allowSendingWithoutReply=null, protectContent=null)
+2022-12-10 21:48:38 INFO  TelegramBot:57 - 09.12.2022.13:52 hi
+2022-12-10 21:48:38 ERROR TelegramBot:89 - org.telegram.telegrambots.meta.exceptions.TelegramApiValidationException: ChatId parameter can't be empty in method: SendMessage(chatId=null, text=Sorry, command was not recognized, parseMode=null, disableWebPagePreview=null, disableNotification=null, replyToMessageId=null, replyMarkup=null, entities=null, allowSendingWithoutReply=null, protectContent=null)
